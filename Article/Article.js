@@ -89,7 +89,61 @@ const data = [
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
-  
+*/
+  function makingComponent(data){
+    let card = document.createElement('div');
+    let cardTitle = document.createElement('h2');
+    let cardDate = document.createElement('p');
+    let cardParagraphOne = document.createElement('p');
+    let cardParagraphTwo = document.createElement('p');
+    let cardParagraphThree = document.createElement('p');
+    let cardSpan = document.createElement('span');
+
+    card.classList.add('article');
+    cardDate.classList.add('date');
+    cardSpan.classList.add('expandButton')
+
+
+    cardTitle.textContent = data.title;
+    cardDate.textContent = data.date;
+    cardParagraphOne.textContent = data.firstParagraph;
+    cardParagraphTwo.textContent = data.secondParagraph;
+    cardParagraphThree.textContent = data.thirdParagraph;
+    cardSpan.textContent = '\u25bc';
+
+    
+    card.append(cardTitle);
+    card.append(cardDate);
+    card.append(cardParagraphOne);
+    card.append(cardParagraphTwo);
+    card.append(cardParagraphThree);
+    card.append(cardSpan);
+
+    card.addEventListener('click', (event)=>{
+      card.classList.toggle('article')
+    })
+
+
+    return card;
+  }
+
+  let newObject = {
+    title: 'new',
+    date: 'today',
+    firstParagraph: 'none',
+    secondParagraph: 'none',
+    thirdParagraph: 'none'
+  }
+data.push(newObject)
+let mapInfo = data.map(object =>{
+  return makingComponent(object)
+})
+mapInfo.forEach(article =>{
+  document.querySelector('.articles').append(article)
+})
+console.log(mapInfo)
+ 
+  /*
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -107,7 +161,7 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
